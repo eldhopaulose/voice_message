@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                         /// do something on error
                       },
                     ),
-                    innerPadding: 12,
+                    innerPadding: 5,
                     cornerRadius: 20,
                   ),
                   const SizedBox(

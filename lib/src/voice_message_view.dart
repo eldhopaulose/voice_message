@@ -13,7 +13,7 @@ import 'package:voice_message_package/src/widgets/play_pause_button.dart';
 ///
 class VoiceMessageView extends StatelessWidget {
   const VoiceMessageView({
-    Key? key,
+    super.key,
     required this.controller,
     this.backgroundColor = Colors.white,
     this.activeSliderColor = Colors.red,
@@ -55,7 +55,7 @@ class VoiceMessageView extends StatelessWidget {
     this.isNeedSendTime = false,
     this.sendTime = '',
     this.icon = Icons.done_all,
-  }) : super(key: key);
+  });
 
   /// The controller for the voice message view.
   final VoiceController controller;
@@ -128,7 +128,7 @@ class VoiceMessageView extends StatelessWidget {
 
     return Container(
       width: 250,
-      height: 100,
+      height: 80,
       padding: EdgeInsets.all(innerPadding),
       decoration: BoxDecoration(
         color: backgroundColor,
@@ -140,7 +140,7 @@ class VoiceMessageView extends StatelessWidget {
         builder: (context, value, child) {
           return Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 width: 50,
@@ -156,56 +156,60 @@ class VoiceMessageView extends StatelessWidget {
                   buttonDecoration: playPauseButtonDecoration,
                 ),
               ),
-              FittedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 50,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 100, child: _noises(newTHeme)),
+                        const SizedBox(width: 20),
+                        _changeSpeedButton(color),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(right: 5),
+                    height: 15,
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    child: Expanded(
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(width: 100, child: _noises(newTHeme)),
-                          _changeSpeedButton(color),
+                          Text(
+                            controller.remindingTime,
+                            style: counterTextStyle,
+                          ),
+                          SizedBox(width: 10),
+                          Row(
+                            children: [
+                              isNeedSendTime
+                                  ? Text(
+                                      sendTime,
+                                      style: counterTextStyle,
+                                    )
+                                  : const SizedBox.shrink(),
+                              const SizedBox(width: 5),
+                              isIconNeed
+                                  ? Icon(
+                                      icon,
+                                      color: isRead
+                                          ? Colors.blue.shade500
+                                          : Colors.grey.shade500,
+                                      size: 15.0,
+                                    )
+                                  : const SizedBox.shrink()
+                            ],
+                          )
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                      child: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(controller.remindingTime,
-                                style: counterTextStyle),
-                            // Spacer(),
-                            Row(
-                              children: [
-                                isNeedSendTime
-                                    ? Text(sendTime, style: counterTextStyle)
-                                    : const SizedBox.shrink(),
-                                const SizedBox(width: 10),
-                                isIconNeed
-                                    ? Icon(
-                                        icon,
-                                        color: isRead
-                                            ? Colors.blue.shade500
-                                            : Colors.grey.shade500,
-                                        size: 15.0,
-                                      )
-                                    : const SizedBox.shrink()
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 10),
             ],
           );
         },
@@ -213,8 +217,8 @@ class VoiceMessageView extends StatelessWidget {
     );
   }
 
-  Container _noises(ThemeData newTHeme) => Container(
-        height: 30,
+  SizedBox _noises(ThemeData newTHeme) => SizedBox(
+        height: 35,
         width: controller.noiseWidth,
         child: Stack(
           alignment: Alignment.center,
@@ -237,8 +241,8 @@ class VoiceMessageView extends StatelessWidget {
                   child: Container(
                     width: controller.noiseWidth,
                     height: 6.w(),
-                    color:
-                        notActiveSliderColor ?? backgroundColor.withOpacity(.4),
+                    color: notActiveSliderColor ??
+                        backgroundColor.withValues(alpha: .4),
                   ),
                 );
               },
@@ -247,7 +251,7 @@ class VoiceMessageView extends StatelessWidget {
               opacity: 0,
               child: Container(
                 width: controller.noiseWidth,
-                color: Colors.transparent.withOpacity(1),
+                color: Colors.transparent.withValues(alpha: 1),
                 child: Theme(
                   data: newTHeme,
                   child: Slider(
