@@ -1,0 +1,1 @@
+ C:\\Users\\coinone\\Documents\\Trial\\voice_message_package\\example\\.dart_tool\\flutter_build\\7dc998d56c3d158e675ab93326200643\\native_assets.yaml: 
