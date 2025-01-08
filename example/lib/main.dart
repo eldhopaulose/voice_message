@@ -20,6 +20,10 @@ class MyApp extends StatelessWidget {
                   const SizedBox(
                       height: 350), // Replaced 50.h with fixed height
                   VoiceMessageView(
+                    isIconNeed: true,
+                    isRead: true,
+                    isNeedSendTime: true,
+                    sendTime: '12:00 PM',
                     controller: VoiceController(
                       audioSrc:
                           'https://dl.solahangs.com/Music/1403/02/H/128/Hiphopologist%20-%20Shakkak%20%28128%29.mp3',
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
                         /// do something on error
                       },
                     ),
-                    innerPadding: 12,
+                    innerPadding: 5,
                     cornerRadius: 20,
                   ),
                   const SizedBox(

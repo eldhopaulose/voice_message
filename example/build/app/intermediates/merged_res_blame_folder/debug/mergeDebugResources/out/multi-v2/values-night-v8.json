@@ -4,7 +4,7 @@
             "outputFile": "com.example.voice_message.app-mergeDebugResources-24:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\eldho_pc\\voice_message\\example\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\coinone\\Documents\\Trial\\voice_message_package\\example\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
